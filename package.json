@@ -19,6 +19,8 @@
     "gulp-util": "^3.0.7",
     "jasmine": "^2.5.0",
     "karma": "^1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
