@@ -6,7 +6,7 @@ import buffer from 'vinyl-buffer';
 import watchify from 'watchify';
 import rename from 'gulp-rename';
 import gutil from 'gulp-util';
-import karma from 'karma'
+import Karma from 'karma'
 
 const config = {
         src: './src/app.js',
@@ -20,7 +20,7 @@ let bundle = (bundler) => {
     .pipe(buffer())
     .pipe(rename('bundle.js'))
     .pipe(gulp.dest(config.dest))
-    .on('error', (err) => gutil.log(gutil.colors.red('==> Build Error! ' + err.message)))
+    .on('error', (err) => gutil.log(gutil.colors.red(`==> Build Error! ${err.message}`)))
     .on('end', () => gutil.log(gutil.colors.green('==> Successful Bundle!')));
 }
 
@@ -34,3 +34,10 @@ gulp.task('default', () => {
 
   bundler.on('update', () => bundle(bundler));
 });
+
+gulp.task('test', (done) => {
+  new Karma.Server({
+    configFile: `${__dirname}/karma.conf.js`,
+    singleRun: false
+  }).start();
+})
