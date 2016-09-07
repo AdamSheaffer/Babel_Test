@@ -8,6 +8,8 @@ import rename from 'gulp-rename';
 import gutil from 'gulp-util';
 import Karma from 'karma'
 
+gutil.env.TFSBuild = false;
+
 const config = {
   src: './src/app.js',
   dest: './dist/'
@@ -35,11 +37,18 @@ gulp.task('bundle', () => {
   bundler.on('update', () => bundle(bundler));
 });
 
+let karmaConfig = {
+  configFile: `${__dirname}/karma.conf.js`,
+  singleRun: !!gutil.env.TFSBuild,
+  browsers: (function() {
+    if(gutil.env.TFSBuild) return ['PhantomJS'];
+
+    return ['Chrome'];
+  })()
+}
+
 gulp.task('test', (done) => {
-  new Karma.Server({
-    configFile: `${__dirname}/karma.conf.js`,
-    singleRun: false
-  }).start();
+  new Karma.Server(karmaConfig).start();
 });
 
 gulp.task('default', ['bundle', 'test']);

@@ -1,17 +1,17 @@
-describe('mainController', () => {
-  let controller = {};
+describe('mainController', function() {
+  var controller = {};
 
-  beforeEach(() => {
+  beforeEach(function() {
     angular.mock.module('babelTest');
   });
 
-  beforeEach(inject(($controller) => {
+  beforeEach(inject(function($controller) {
     controller = $controller('mainController', {
       $scope: {}
     });
   }));
 
-  it('should set a title', () => {
+  it('should set a title', function() {
     expect(controller.title).toBe('Gulp and Babel Test');
   });
 
