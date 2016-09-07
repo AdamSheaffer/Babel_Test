@@ -1,4 +1,4 @@
-import gulp from'gulp';
+import gulp from 'gulp';
 import babelify from 'babelify';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
@@ -6,6 +6,7 @@ import buffer from 'vinyl-buffer';
 import watchify from 'watchify';
 import rename from 'gulp-rename';
 import gutil from 'gulp-util';
+import karma from 'karma'
 
 const config = {
         src: './src/app.js',
@@ -19,8 +20,8 @@ let bundle = (bundler) => {
     .pipe(buffer())
     .pipe(rename('bundle.js'))
     .pipe(gulp.dest(config.dest))
-    .on('end', () => gutil.log(gutil.colors.green('==> Successful Bundle!')))
-    .on('error', (err) => gutil.log(gutil.colors.red('==> Build Error! ' + err.message)));
+    .on('error', (err) => gutil.log(gutil.colors.red('==> Build Error! ' + err.message)))
+    .on('end', () => gutil.log(gutil.colors.green('==> Successful Bundle!')));
 }
 
 gulp.task('default', () => {
