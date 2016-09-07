@@ -9,9 +9,9 @@ import gutil from 'gulp-util';
 import Karma from 'karma'
 
 const config = {
-        src: './src/app.js',
-        dest: './dist/'
-      };
+  src: './src/app.js',
+  dest: './dist/'
+};
 
 let bundle = (bundler) => {
   bundler
@@ -24,7 +24,7 @@ let bundle = (bundler) => {
     .on('end', () => gutil.log(gutil.colors.green('==> Successful Bundle!')));
 }
 
-gulp.task('default', () => {
+gulp.task('bundle', () => {
 
   let bundler = browserify(config.src, {debug: true})
                   .plugin(watchify)
@@ -40,4 +40,6 @@ gulp.task('test', (done) => {
     configFile: `${__dirname}/karma.conf.js`,
     singleRun: false
   }).start();
-})
+});
+
+gulp.task('default', ['bundle', 'test']);

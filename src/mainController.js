@@ -1,7 +1,7 @@
 function mainController($scope) {
   const title = 'Gulp and Babel Test';
 
-  $scope.title = title;
+  this.title = title;
 }
 
 export default mainController
